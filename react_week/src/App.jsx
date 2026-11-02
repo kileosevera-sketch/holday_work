@@ -3,18 +3,20 @@ import Sidebar from './components/sidebar';
 import DashCards from './components/dashcards';
 import Analysis from './components/Analysis';
 import TrendsAnalysis from './components/trendsanalysis';
-import FeedbackHistory from './components/FeedbackHistory';
+import ReportDownloads from './components/ReportDownloads';
 import EarlyWarnings from './components/EarlyWarnings';
 import AIInsights from './components/AIInsights';
-import { fetchDashboardData } from './api';
+import Login from './components/Login';
+import { clearAccessToken, fetchDashboardData, getAccessToken } from './api';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(Boolean(getAccessToken()));
   const [currentTab, setCurrentTab] = useState('Home');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [dashboardData, setDashboardData] = useState({
     summary: { total_feedback: 0, sentiment: {}, severity: {}, causes: [], daily: [] },
-    feedback: { items: [], total: 0 }, reports: [], alerts: [], predictions: [],
+    feedback: { items: [], total: 0 }, reports: [], alerts: [], predictions: [], dailyTrends: [],
   });
   const [connection, setConnection] = useState('loading');
   const [loadError, setLoadError] = useState('');
@@ -34,6 +36,13 @@ function App() {
   }, []);
 
   useEffect(() => {
+    const handleExpiredSession = () => setIsAuthenticated(false);
+    window.addEventListener('auth:expired', handleExpiredSession);
+    return () => window.removeEventListener('auth:expired', handleExpiredSession);
+  }, []);
+
+  useEffect(() => {
+    if (!isAuthenticated) return undefined;
     let active = true;
     fetchDashboardData().then(data => {
       if (!active) return;
@@ -46,15 +55,18 @@ function App() {
       setLoadError(error.message);
     });
     return () => { active = false; };
-  }, []);
+  }, [isAuthenticated]);
+
+  if (!isAuthenticated) {
+    return <Login onLogin={() => setIsAuthenticated(true)} />;
+  }
 
   const handleUploadComplete = async () => {
-    setCurrentTab('Analyze');
     try { await refreshData(); } catch { /* The upload itself has already succeeded. */ }
   };
 
   return (
-    <div className={`dashboard-theme ${isDarkMode ? 'theme-dark' : 'theme-light'} relative isolate flex min-h-screen flex-col bg-[#F4F7F4] md:flex-row`}>
+    <div className={`dashboard-theme ${isDarkMode ? 'theme-dark' : 'theme-light'} relative isolate flex min-h-screen flex-col bg-[#C08A5B] md:h-screen md:overflow-hidden md:flex-row`}>
       <div className="dashboard-background-rings" aria-hidden="true">
         <svg
           className="dashboard-background-rings__art"
@@ -80,39 +92,47 @@ function App() {
         onToggleCollapsed={() => setIsSidebarCollapsed((collapsed) => !collapsed)}
         isDarkMode={isDarkMode}
         onToggleTheme={() => setIsDarkMode((darkMode) => !darkMode)}
+        onLogout={() => {
+          clearAccessToken();
+          setIsAuthenticated(false);
+        }}
       />
 
       {/* MAIN CONTENT AREA */}
-      <main className="relative z-10 min-w-0 flex-1 overflow-y-auto px-4 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-9">
-        <div className={`mb-5 flex items-center justify-between gap-3 rounded-lg px-4 py-2.5 text-xs ${connection === 'connected' ? 'bg-emerald-50 text-emerald-800' : connection === 'loading' ? 'bg-slate-100 text-slate-600' : 'bg-rose-50 text-rose-800'}`} role="status">
-          <span>{connection === 'connected' ? `Backend connected · ${dashboardData.summary.total_feedback} saved feedback records` : connection === 'loading' ? 'Connecting to feedback backend…' : `Backend unavailable · ${loadError}`}</span>
-          {connection === 'disconnected' && <button type="button" onClick={() => refreshData().catch(() => {})} className="font-semibold underline">Retry</button>}
-        </div>
+      <main className="relative z-10 min-h-0 min-w-0 flex-1 overflow-y-auto px-4 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-9">
+        {connection !== 'connected' && (
+          <div className={`mb-5 flex items-center justify-between gap-3 rounded-lg px-4 py-2.5 text-xs ${connection === 'loading' ? 'bg-slate-100 text-slate-600' : 'bg-rose-50 text-rose-800'}`} role="status">
+            <span>{connection === 'loading' ? 'Connecting to feedback backend…' : `Backend unavailable · ${loadError}`}</span>
+            {connection === 'disconnected' && <button type="button" onClick={() => refreshData().catch(() => {})} className="font-semibold underline">Retry</button>}
+          </div>
+        )}
         
         {/* Page 1: Home */}
         {currentTab === 'Home' && (
           <DashCards 
-            onNavigateToAnalyze={() => setCurrentTab('Analyze')} 
             onUploadComplete={handleUploadComplete}
             feedback={dashboardData.feedback.items}
             feedbackTotal={dashboardData.feedback.total}
+            dailyTrends={dashboardData.dailyTrends}
             summary={dashboardData.summary}
+            latestBatch={dashboardData.reports[0] || null}
+            onNavigate={setCurrentTab}
           />
         )}
 
         {/* Page 2: Analyze */}
         {currentTab === 'Analyze' && (
-          <Analysis summary={dashboardData.summary} feedback={dashboardData.feedback.items} />
+          <Analysis summary={dashboardData.summary} feedback={dashboardData.feedback.items} onRefresh={refreshData} />
         )}
 
         {/* Page 3: Trends Analysis */}
         {currentTab === 'Trends Analysis' && (
-          <TrendsAnalysis data={{ totalFeedback: dashboardData.summary.total_feedback, sentiment: dashboardData.summary.sentiment, severity: dashboardData.summary.severity, daily: dashboardData.summary.daily }} />
+          <TrendsAnalysis data={{ totalFeedback: dashboardData.summary.analyzed_feedback, sentiment: dashboardData.summary.sentiment, severity: dashboardData.summary.severity, daily: dashboardData.summary.daily }} />
         )}
 
         {/* Page 4: Feedback History */}
         {currentTab === 'Feedback History' && (
-          <FeedbackHistory reports={dashboardData.reports} onRefresh={() => refreshData().catch(() => {})} />
+          <ReportDownloads reports={dashboardData.reports} totalFeedback={dashboardData.summary.total_feedback} />
         )}
 
         {currentTab === 'Early Warnings' && (

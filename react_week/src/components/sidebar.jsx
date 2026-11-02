@@ -1,5 +1,6 @@
+import { Leaf, LogOut } from 'lucide-react';
 
-function Sidebar({ currentTab, setCurrentTab, isCollapsed, onToggleCollapsed, isDarkMode, onToggleTheme }) {
+function Sidebar({ currentTab, setCurrentTab, isCollapsed, onToggleCollapsed, isDarkMode, onToggleTheme, onLogout }) {
   const menuItems = [
     { 
       name: 'Home', 
@@ -53,21 +54,19 @@ function Sidebar({ currentTab, setCurrentTab, isCollapsed, onToggleCollapsed, is
   ];
 
   return (
-    <aside className={`dashboard-sidebar ${isCollapsed ? 'dashboard-sidebar--collapsed' : ''} relative z-10 w-full min-w-0 shrink-0 rounded-none bg-[#080B0A] p-4 text-white transition-[width] duration-200 md:sticky md:top-0 md:flex md:h-screen md:min-h-0 md:self-start md:flex-col md:justify-between md:rounded-tr-[5rem] ${isCollapsed ? 'md:w-20 md:p-3' : 'md:w-72 md:p-6'}`}>
+    <aside className={`dashboard-sidebar ${isCollapsed ? 'dashboard-sidebar--collapsed' : ''} relative z-10 w-full min-w-0 shrink-0 rounded-none bg-[#3B1F12] p-4 text-white transition-[width] duration-200 md:sticky md:top-0 md:flex md:h-screen md:min-h-0 md:self-start md:flex-col md:justify-between md:rounded-tr-[5rem] ${isCollapsed ? 'md:w-20 md:p-3' : 'md:w-72 md:p-6'}`}>
       <div className="min-w-0">
         {/* LOGO & HEADER */}
         <div className={`mb-6 flex items-center gap-3.5 md:mb-12 ${isCollapsed ? 'md:justify-center' : ''}`}>
-          <div className="w-12 h-12 rounded-2xl bg-[#10231F] text-emerald-300 flex items-center justify-center shadow-sm relative">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
-            </svg>
+          <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-[#6F4530] text-[#E8D1B5] shadow-sm">
+            <Leaf aria-hidden="true" className="h-7 w-7" strokeWidth={1.8} />
             <span className="absolute -top-1 -right-1 flex h-3 w-3">
-              <span className="relative inline-flex h-3 w-3 rounded-full bg-teal-400 ring-2 ring-[#080B0A]"></span>
+              <span className="relative inline-flex h-3 w-3 rounded-full bg-[#C08A5B] ring-2 ring-[#3B1F12]"></span>
             </span>
           </div>
           <div className={isCollapsed ? 'md:hidden' : 'md:pr-9'}>
-            <h1 className="font-extrabold text-base tracking-wider text-white uppercase">AI POSTSALE</h1>
-            <p className="text-[11px] text-slate-300 font-medium">Customer Intelligence</p>
+            <h1 className="font-extrabold text-base tracking-tight text-white">Customer Intelligence</h1>
+            <p className="text-[11px] font-medium uppercase tracking-wider text-slate-300">AI POSTSALE</p>
           </div>
         </div>
 
@@ -141,6 +140,16 @@ function Sidebar({ currentTab, setCurrentTab, isCollapsed, onToggleCollapsed, is
           </button>
           <p className={`mt-1 pl-11 text-xs text-slate-400 ${isCollapsed ? 'md:hidden' : ''}`}>{isDarkMode ? 'On · dark brown theme' : 'Off · light theme'}</p>
         </div>
+        <button
+          type="button"
+          onClick={onLogout}
+          className={`mt-3 flex min-h-11 w-full items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-white ${isCollapsed ? 'md:justify-center md:px-2' : 'sm:px-4'}`}
+          aria-label="Sign out"
+          title={isCollapsed ? 'Sign out' : undefined}
+        >
+          <LogOut aria-hidden="true" size={18} />
+          <span className={isCollapsed ? 'md:hidden' : ''}>Sign out</span>
+        </button>
       </div>
     </aside>
   );

@@ -1,0 +1,41 @@
+customer_id,product_model,feedback_text,service_date
+CUST-1000,UltraTab 11,Called customer support three times regarding my broken unit. The representative was rude and hung up on me.,2026-10-25
+CUST-1001,ApexBook Pro 15,Dead on arrival. Plugged it in for 4 hours but there is no power and the charging LED never lights up.,2026-10-18
+CUST-1002,UltraTab 11,There was a strong burning smell coming from the exhaust vents before the system shut down from thermal overheating.,2026-10-23
+CUST-1003,QuantumPhone X,Called customer support three times regarding my broken unit. The representative was rude and hung up on me.,2026-10-27
+CUST-1004,QuantumPhone X,The touchscreen is completely unresponsive on the right half. Ghost touch keeps opening random apps.,2026-10-25
+CUST-1005,EchoSound Max,Sudden shutdown while using navigation. Battery drops from 80% to 0% in under 5 minutes.,2026-10-17
+CUST-1006,ApexBook Pro 15,"Cancelled the subscription three weeks ago, but my account was still billed $149 yesterday. Unauthorized charge!",2026-10-31
+CUST-1007,EchoSound Max,Customer service was incredibly helpful in replacing my lost cable within 24 hours. Highly satisfied!,2026-10-17
+CUST-1008,UltraTab 11,Severe thermal throttling causing heavy stutter and frame drops. Back panel reached over 50 degrees Celsius.,2026-10-28
+CUST-1009,ApexBook Pro 15,Microphone stopped working completely. Callers can only hear static and muffled clicks.,2026-10-24
+CUST-1010,ApexBook Pro 15,"Cancelled the subscription three weeks ago, but my account was still billed $149 yesterday. Unauthorized charge!",2026-10-26
+CUST-1011,QuantumPhone X,There was a strong burning smell coming from the exhaust vents before the system shut down from thermal overheating.,2026-10-21
+CUST-1012,ApexBook Pro 15,Called customer support three times regarding my broken unit. The representative was rude and hung up on me.,2026-10-18
+CUST-1013,EchoSound Max,Customer service was incredibly helpful in replacing my lost cable within 24 hours. Highly satisfied!,2026-10-20
+CUST-1014,EchoSound Max,Great product! The battery easily lasts two full days and the display colors are vibrant and crisp.,2026-10-21
+CUST-1015,UltraTab 11,I was charged twice on my credit card for the annual warranty renewal. Demanding an immediate refund.,2026-10-29
+CUST-1016,QuantumPhone X,The app freezes and crashes whenever I try to export reports. Constant boot loop after the latest firmware update.,2026-10-24
+CUST-1017,UltraTab 11,"Cancelled the subscription three weeks ago, but my account was still billed $149 yesterday. Unauthorized charge!",2026-10-30
+CUST-1018,ApexBook Pro 15,The delivery package was completely crushed when it arrived. The corner of the monitor frame is cracked and dented.,2026-10-28
+CUST-1019,ApexBook Pro 15,Package was delayed by two weeks and tracking was never updated. Box arrived ripped open.,2026-10-31
+CUST-1020,UltraTab 11,Called customer support three times regarding my broken unit. The representative was rude and hung up on me.,2026-10-22
+CUST-1021,ApexBook Pro 15,Great product! The battery easily lasts two full days and the display colors are vibrant and crisp.,2026-10-20
+CUST-1022,UltraTab 11,Dead on arrival. Plugged it in for 4 hours but there is no power and the charging LED never lights up.,2026-10-29
+CUST-1023,ApexBook Pro 15,Won't charge with the included adapter. The charging port feels loose and sparks intermittently.,2026-10-30
+CUST-1024,QuantumPhone X,The touchscreen is completely unresponsive on the right half. Ghost touch keeps opening random apps.,2026-10-20
+CUST-1025,UltraTab 11,Customer service was incredibly helpful in replacing my lost cable within 24 hours. Highly satisfied!,2026-10-17
+CUST-1026,ApexBook Pro 15,Customer service was incredibly helpful in replacing my lost cable within 24 hours. Highly satisfied!,2026-10-28
+CUST-1027,EchoSound Max,Submitted an urgent support ticket 6 days ago with zero response. Ticket was closed without any resolution.,2026-10-27
+CUST-1028,UltraTab 11,Won't charge with the included adapter. The charging port feels loose and sparks intermittently.,2026-10-31
+CUST-1029,ApexBook Pro 15,The app freezes and crashes whenever I try to export reports. Constant boot loop after the latest firmware update.,2026-10-17
+CUST-1030,QuantumPhone X,Package was delayed by two weeks and tracking was never updated. Box arrived ripped open.,2026-10-31
+CUST-1031,UltraTab 11,Submitted an urgent support ticket 6 days ago with zero response. Ticket was closed without any resolution.,2026-10-21
+CUST-1032,EchoSound Max,The delivery package was completely crushed when it arrived. The corner of the monitor frame is cracked and dented.,2026-10-24
+CUST-1033,EchoSound Max,Customer service was incredibly helpful in replacing my lost cable within 24 hours. Highly satisfied!,2026-10-17
+CUST-1034,UltraTab 11,Exceptional build quality and very fast shipping! Everything works smoothly right out of the box.,2026-10-27
+CUST-1035,EchoSound Max,Bluetooth pairing fails with all my headphones. Audio cuts out and stutters if I move more than 2 feet away.,2026-10-24
+CUST-1036,QuantumPhone X,Called customer support three times regarding my broken unit. The representative was rude and hung up on me.,2026-10-24
+CUST-1037,EchoSound Max,Encountered multiple blue screen errors (KERNEL_DATA_INPAGE_ERROR) after waking the machine from sleep mode.,2026-10-18
+CUST-1038,QuantumPhone X,Severe thermal throttling causing heavy stutter and frame drops. Back panel reached over 50 degrees Celsius.,2026-10-24
+CUST-1039,QuantumPhone X,The left speaker has a loud buzzing noise and distorted audio at volumes above 40%.,2026-10-19
